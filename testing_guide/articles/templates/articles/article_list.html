@@ -1,0 +1,35 @@
+{% extends 'articles/base.html' %}
+{% load static %}
+{% load articles %}
+
+{% block main %}
+    {% for article in object_list %}
+        <div class="articles_card">
+            <img src="{% static article.img_src %}" height="25px;"/>
+            <span class="article_title">{{article.title}}</span>
+            <div style="display: inline-flex;">
+                <div class="article_category" style="background-color: {{ article.category|article_color }};">{{article.category}}</div>
+                <button class="btn-primary btn-article" onclick="location.href='{% url 'detail_articles' article.pk %}'">Open</button>
+            </div>
+        </div>
+    {% empty %}
+    <div class="articles_empty">
+        <span class="emtpy_list">Aucun Article</span>
+    </div>
+    {% endfor %}
+    {% if is_paginated %}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+               <button class="btn-primary btn-article" onclick="location.href='{% url 'list_articles' %}?page={{ page_obj.previous_page_number }}'">Previous</button>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <button class="btn-primary btn-article" onclick="location.href='{% url 'list_articles' %}?page={{ page_obj.next_page_number }}'">Next</button>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
+{% endblock %}

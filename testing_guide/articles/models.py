@@ -1,7 +1,5 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
-from django.contrib.auth.models import User
 
 
 class ArticleCategory(models.TextChoices):
@@ -19,9 +17,11 @@ class ArticleCategory(models.TextChoices):
 
 # Create your models here.
 class Article(models.Model):
-    title = models.CharField(_('Title'), max_length=32)
+
+    title = models.CharField(_('Title'), max_length=50)
     category = models.TextField(_('Category'), choices=ArticleCategory.choices)
-    content = models.BinaryField(_('Content'))
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    created = models.DateTimeField(default=timezone.now)
-    published = models.BooleanField(default=False)
+    content = models.TextField(_('Content'))
+    image = models.ImageField(default='background-image.png')
+
+    def img_src(self):
+        return f'images/{self.image}'

@@ -13,12 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from articles.views import my_view
+from articles.views import index, ArticlesView, ArticleListView
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
 
 urlpatterns = [
-    path('', my_view, name="my_view")
+    path('', index, name="index"),
+    path('articles/list/', ArticleListView.as_view(), name='list_articles'),
+    path('articles/<int:pk>/', ArticlesView.as_view(), name='detail_articles')
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

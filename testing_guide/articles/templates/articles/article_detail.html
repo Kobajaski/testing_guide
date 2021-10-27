@@ -1,0 +1,15 @@
+{% extends 'articles/base.html' %}
+{% load static %}
+{% load articles %}
+
+{% block main %}
+<div class="article_detail_title">
+    <div class="article_category" style="background-color: {{ article.category|article_color }};"><h3>{{ object.title }}</h3></div>
+</div>
+<div class="article_detail_img">
+    <img src="{% static object.img_src %}" width="50%"/>
+</div>
+<div class="article_detail_content">
+    {{ object.content|htmlize|safe }}
+</div>
+{% endblock %}

@@ -7,11 +7,14 @@ name = "pypi"
 django = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+pillow = "*"
+markdown = "*"
 
 [dev-packages]
 behave-django = "*"
 coverage = "*"
 ipython = "*"
+faker = "*"
 
 [requires]
 python_version = "3.9"
