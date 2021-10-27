@@ -9,7 +9,7 @@
             <span class="article_title">{{article.title}}</span>
             <div style="display: inline-flex;">
                 <div class="article_category" style="background-color: {{ article.category|article_color }};">{{article.category}}</div>
-                <button class="btn-primary btn-article" onclick="location.href='{% url 'detail_articles' article.pk %}'">Open</button>
+                <button class="btn-primary btn-article" id="article-{{article.pk}}" onclick="location.href='{% url 'detail_articles' article.pk %}'">Open</button>
             </div>
         </div>
     {% empty %}
